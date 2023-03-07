@@ -11,6 +11,8 @@ public:
 	void* m_local_player_data{};
 	void* m_patch_wood{};
 	void* m_item_amount{};
+	void* m_patch_fov{};
+	void* m_player_func{};
 };
 
 inline pointers* g_pointers{};

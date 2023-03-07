@@ -22,8 +22,18 @@ pointers::pointers()
 	{
 		m_item_amount = ptr.add(1).rip().as<void*>();
 	});
-	
 	main_batch.run(memory::module("GameAssembly.dll"));
+
+	memory::pattern_batch unityplayer_batch;
+	unityplayer_batch.add("patch_fov", "E8 ? ? ? ? 44 89 BE ? ? ? ? 49 8B 0C DE", [this](memory::handle ptr)
+	{
+		m_patch_fov = ptr.add(1).rip().as<void*>();
+	});
+	unityplayer_batch.add("player_func", "48 8B C4 48 89 58 10 48 89 68 18 56 57 41 56 48 81 EC ? ? ? ? 0F 29 70 D8", [this](memory::handle ptr)
+	{
+		m_player_func = ptr.as<void*>();
+	});
+	unityplayer_batch.run(memory::module("UnityPlayer.dll"));
 
 	g_pointers = this;
 }

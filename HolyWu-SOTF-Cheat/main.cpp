@@ -35,6 +35,22 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 bool init = false;
 auto tick = GetTickCount64();
 
+namespace ImGui
+{
+	void TipsHelper(const char* tip)
+	{
+		ImGui::TextDisabled("(?)");
+		if (ImGui::IsItemHovered())
+		{
+			ImGui::BeginTooltip();
+			ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+			ImGui::TextUnformatted(tip);
+			ImGui::PopTextWrapPos();
+			ImGui::EndTooltip();
+		}
+	}
+}
+
 HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 {
 	if (!init)
@@ -85,17 +101,40 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			ImGui::SliderFloat("食物", &sets::p_player_state_data->m_player_food->m_current, 0, 100, "%.1f");
 			ImGui::SliderFloat("精神", &sets::p_player_state_data->m_player_sleep->m_current, 0, 100, "%.1f");
 			ImGui::PopItemWidth();
+
 			ImGui::Checkbox("无限丢弃(刷木头等)", &sets::patch_wood);
 			ImGui::Checkbox("无限物品", &sets::item_bool);
 			ImGui::SameLine();
-			ImGui::PushItemWidth(500);
+			ImGui::PushItemWidth(250);
 			ImGui::InputInt("欲设置数量", &sets::item_amount);
 			ImGui::PopItemWidth();
+
 			ImGui::Checkbox("树叶收集机", &sets::is_modify_leaf);
 			ImGui::SameLine();
-			ImGui::PushItemWidth(500);
+			ImGui::PushItemWidth(250);
 			ImGui::InputInt("每次欲收集数量", &sets::leaf_amount);
 			ImGui::PopItemWidth();
+
+			ImGui::Checkbox("自定义视角(FOV)", &sets::is_modify_fov);
+			ImGui::SameLine();
+			ImGui::PushItemWidth(250);
+			ImGui::InputInt("值", &sets::fov_value);
+			ImGui::PopItemWidth();
+			ImGui::SameLine();
+			ImGui::TipsHelper("填写后进入游戏设置随意修改一下即可触发");
+			
+			ImGui::PushItemWidth(160);
+			ImGui::InputFloat("X", &sets::pos_x, 0.1f, 1, 1);
+			ImGui::SameLine();
+			ImGui::InputFloat("Y", &sets::pos_y, 0.1f, 1, 1);
+			ImGui::SameLine();
+			ImGui::InputFloat("Z", &sets::pos_z, 0.1f, 1, 1);
+			ImGui::PopItemWidth();
+			ImGui::SameLine();
+			if (ImGui::Button("传送到该坐标"))
+			{
+				sets::is_modify_pos = true;
+			}
 		}
 		else
 		{
