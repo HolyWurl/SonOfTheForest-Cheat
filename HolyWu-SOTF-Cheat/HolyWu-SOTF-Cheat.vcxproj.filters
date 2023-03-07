@@ -178,6 +178,7 @@
     <None Include="kiero\minhook\dll_resources\MinHook.def">
       <Filter>kiero\minhook</Filter>
     </None>
+    <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="kiero\minhook\dll_resources\MinHook.rc">
