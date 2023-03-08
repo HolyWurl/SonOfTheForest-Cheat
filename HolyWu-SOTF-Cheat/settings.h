@@ -21,4 +21,9 @@ namespace sets {
 	inline float pos_y = 0;
 	inline float pos_z = 0;
 	inline bool is_modify_pos = false;
+
+	inline bool is_modify_time = false;
+	inline uint64_t current_minute = 0;
+	inline int32_t set_minute = 0;
+	inline uint8_t time_set_count = 0;
 }

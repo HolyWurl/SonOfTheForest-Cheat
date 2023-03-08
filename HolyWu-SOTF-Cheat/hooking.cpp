@@ -10,7 +10,8 @@ hooking::hooking() :
 	m_local_player_data_hook("local_player_data", g_pointers->m_local_player_data, &hooks::hk_local_player_data),
 	m_item_amount_hook("item_amount", g_pointers->m_item_amount, &hooks::hk_item_amount),
 	m_patch_fov_hook("patch_fov", g_pointers->m_patch_fov, &hooks::hk_patch_fov),
-	m_player_func_hook("player_func", g_pointers->m_player_func, &hooks::hk_player_func)
+	m_player_func_hook("player_func", g_pointers->m_player_func, &hooks::hk_player_func),
+	m_world_time_hook("world_time", g_pointers->m_world_time, &hooks::hk_world_time)
 {
 	g_hooking = this;
 }
@@ -30,6 +31,7 @@ void hooking::enable()
 	m_item_amount_hook.enable();
 	m_patch_fov_hook.enable();
 	m_player_func_hook.enable();
+	m_world_time_hook.enable();
 	m_enabled = true;
 }
 
@@ -42,6 +44,7 @@ void hooking::disable()
 	m_item_amount_hook.disable();
 	m_patch_fov_hook.disable();
 	m_player_func_hook.disable();
+	m_world_time_hook.disable();
 }
 
 minhook_keepalive::minhook_keepalive()
@@ -99,4 +102,21 @@ bool hooks::hk_player_func(UPlayerData* data, float* a2, bool a3)
 		sets::is_modify_pos = false;
 	}
 	return ret;
+}
+uint64_t hooks::hk_world_time(uint64_t* time)
+{
+	if (time)
+	{
+		if (sets::is_modify_time)
+		{
+			sets::time_set_count++;
+			*time = (uint64_t)sets::set_minute * 600000000;
+			if (sets::time_set_count == 63)
+			{
+				sets::is_modify_time = false;
+			}
+		}
+		sets::current_minute = *time / 600000000;
+	}
+	return g_hooking->m_world_time_hook.get_original<decltype(&hk_world_time)>()(time);
 }

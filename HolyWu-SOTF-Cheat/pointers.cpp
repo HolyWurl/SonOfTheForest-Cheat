@@ -22,6 +22,10 @@ pointers::pointers()
 	{
 		m_item_amount = ptr.add(1).rip().as<void*>();
 	});
+	main_batch.add("world_time", "E8 ? ? ? ? 8B D7 2B D6", [this](memory::handle ptr)
+	{
+		m_world_time = ptr.add(1).rip().as<void*>();
+	});
 	main_batch.run(memory::module("GameAssembly.dll"));
 
 	memory::pattern_batch unityplayer_batch;

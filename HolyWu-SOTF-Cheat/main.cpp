@@ -112,7 +112,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			ImGui::Checkbox("树叶收集机", &sets::is_modify_leaf);
 			ImGui::SameLine();
 			ImGui::PushItemWidth(250);
-			ImGui::InputInt("每次欲收集数量", &sets::leaf_amount);
+			ImGui::InputInt("欲收集数量", &sets::leaf_amount);
 			ImGui::PopItemWidth();
 
 			ImGui::Checkbox("自定义视角(FOV)", &sets::is_modify_fov);
@@ -135,6 +135,19 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			{
 				sets::is_modify_pos = true;
 			}
+
+			ImGui::Text("时间(分):%d", sets::current_minute);
+			ImGui::SameLine();
+			ImGui::PushItemWidth(160);
+			ImGui::InputInt("欲设置时间(分)", &sets::set_minute);
+			ImGui::PopItemWidth();
+			ImGui::SameLine();
+			if (ImGui::Button("设置"))
+			{
+				sets::is_modify_time = true;
+				sets::time_set_count = 0;
+			}
+
 		}
 		else
 		{

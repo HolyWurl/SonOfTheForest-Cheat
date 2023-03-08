@@ -13,6 +13,7 @@ public:
 	void* m_item_amount{};
 	void* m_patch_fov{};
 	void* m_player_func{};
+	void* m_world_time{};
 };
 
 inline pointers* g_pointers{};

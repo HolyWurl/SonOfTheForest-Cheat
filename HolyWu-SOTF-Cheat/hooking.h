@@ -9,6 +9,7 @@ struct hooks
 	static __int64 hk_item_amount(__int64 a1, uint32_t a2);
 	static void hk_patch_fov(__int64 a1, float a2);
 	static bool hk_player_func(UPlayerData* a1, float* a2, bool a3);
+	static uint64_t hk_world_time(uint64_t* time);
 };
 struct minhook_keepalive
 {
@@ -34,6 +35,7 @@ private:
 	detour_hook m_item_amount_hook;
 	detour_hook m_patch_fov_hook;
 	detour_hook m_player_func_hook;
+	detour_hook m_world_time_hook;
 };
 
 inline hooking* g_hooking{};
