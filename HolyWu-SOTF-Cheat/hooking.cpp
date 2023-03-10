@@ -2,8 +2,9 @@
 #include "hooking.h"
 #include "memory/module.hpp"
 #include "pointers.h"
-#include "kiero/minhook//include/MinHook.h"
+#include "kiero/minhook/include/MinHook.h"
 #include <thread>
+#include <emmintrin.h>
 
 hooking::hooking() :
 	m_get_leaf_call_hook("get_leaf_call", g_pointers->m_get_leaf_call, &hooks::hk_get_leaf_call),
@@ -57,9 +58,9 @@ minhook_keepalive::~minhook_keepalive()
 	//MH_Uninitialize();
 }
 
-__int64 hooks::hk_local_player_data(void* a1)
+__int64 hooks::hk_local_player_data(CPlayerStateData* a1)
 {
-	sets::p_player_state_data = (CPlayerStateData*)a1;
+	sets::p_player_state_data = a1;
 	return g_hooking->m_local_player_data_hook.get_original<decltype(&hk_local_player_data)>()(a1);
 }
 
@@ -103,20 +104,17 @@ bool hooks::hk_player_func(UPlayerData* data, float* a2, bool a3)
 	}
 	return ret;
 }
-uint64_t hooks::hk_world_time(uint64_t* time)
+__int64 hooks::hk_world_time(WorldTime* time, uint64_t* a2, bool a3)
 {
+	auto ret = g_hooking->m_world_time_hook.get_original<decltype(&hk_world_time)>()(time, a2, a3);
 	if (time)
 	{
 		if (sets::is_modify_time)
 		{
-			sets::time_set_count++;
-			*time = (uint64_t)sets::set_minute * 600000000;
-			if (sets::time_set_count == 63)
-			{
-				sets::is_modify_time = false;
-			}
+			time->m_times = (uint64_t)sets::set_minute * 600000000;
+			sets::is_modify_time = false;
 		}
-		sets::current_minute = *time / 600000000;
+		sets::current_minute = time->m_times / 600000000;
 	}
-	return g_hooking->m_world_time_hook.get_original<decltype(&hk_world_time)>()(time);
+	return ret;
 }

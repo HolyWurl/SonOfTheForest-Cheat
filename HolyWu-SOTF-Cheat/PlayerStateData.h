@@ -22,69 +22,90 @@ class CPlayerWater
 public:
 	char pad_0000[16]; //0x0000
 	float m_current; //0x0010
-	char pad_0014[116]; //0x0014
-}; //Size: 0x0088
-static_assert(sizeof(CPlayerWater) == 0x88);
+	char pad_0014[12]; //0x0014
+	float m_min; //0x0020
+	float m_max; //0x0024
+	char pad_0028[100]; //0x0028
+}; //Size: 0x008C
+static_assert(sizeof(CPlayerWater) == 0x8C);
 
 class CPlayerEnergy
 {
 public:
 	char pad_0000[16]; //0x0000
 	float m_current; //0x0010
-	char pad_0014[116]; //0x0014
-}; //Size: 0x0088
-static_assert(sizeof(CPlayerEnergy) == 0x88);
+	char pad_0014[12]; //0x0014
+	float m_min; //0x0020
+	float m_max; //0x0024
+	char pad_0028[100]; //0x0028
+}; //Size: 0x008C
+static_assert(sizeof(CPlayerEnergy) == 0x8C);
 
 class CPlayerHealth
 {
 public:
 	char pad_0000[16]; //0x0000
 	float m_current; //0x0010
-	char pad_0014[116]; //0x0014
-}; //Size: 0x0088
-static_assert(sizeof(CPlayerHealth) == 0x88);
+	char pad_0014[12]; //0x0014
+	float m_min; //0x0020
+	float m_max; //0x0024
+	char pad_0028[100]; //0x0028
+}; //Size: 0x008C
+static_assert(sizeof(CPlayerHealth) == 0x8C);
 
 class CPlayerPower
 {
 public:
 	char pad_0000[16]; //0x0000
 	float m_current; //0x0010
-	char pad_0014[116]; //0x0014
-}; //Size: 0x0088
-static_assert(sizeof(CPlayerPower) == 0x88);
+	char pad_0014[12]; //0x0014
+	float m_min; //0x0020
+	float m_max; //0x0024
+	char pad_0028[100]; //0x0028
+}; //Size: 0x008C
+static_assert(sizeof(CPlayerPower) == 0x8C);
 
 class CPlayerMaxEnergy
 {
 public:
 	char pad_0000[16]; //0x0000
 	float m_current; //0x0010
-	char pad_0014[116]; //0x0014
-}; //Size: 0x0088
-static_assert(sizeof(CPlayerMaxEnergy) == 0x88);
+	char pad_0014[12]; //0x0014
+	float m_min; //0x0020
+	float m_max; //0x0024
+	char pad_0028[100]; //0x0028
+}; //Size: 0x008C
+static_assert(sizeof(CPlayerMaxEnergy) == 0x8C);
 
 class CPlayerUnk
 {
 public:
 	char pad_0000[16]; //0x0000
-	float m_unk; //0x0010
-	char pad_0014[116]; //0x0014
-}; //Size: 0x0088
-static_assert(sizeof(CPlayerUnk) == 0x88);
+	float m_unk; //0x0000
+	char pad_0014[120]; //0x0014
+}; //Size: 0x008C
+static_assert(sizeof(CPlayerUnk) == 0x8C);
 
 class CPlayerFood
 {
 public:
 	char pad_0000[16]; //0x0000
 	float m_current; //0x0010
-	char pad_0014[116]; //0x0014
-}; //Size: 0x0088
-static_assert(sizeof(CPlayerFood) == 0x88);
+	char pad_0014[12]; //0x0014
+	float m_min; //0x0020
+	float m_max; //0x0024
+	char pad_0028[100]; //0x0028
+}; //Size: 0x008C
+static_assert(sizeof(CPlayerFood) == 0x8C);
 
 class CPlayerSleep
 {
 public:
 	char pad_0000[16]; //0x0000
 	float m_current; //0x0010
-	char pad_0014[116]; //0x0014
+	char pad_0014[12]; //0x0014
+	float m_min; //0x0020
+	float m_max; //0x0024
+	char pad_0028[96]; //0x0028
 }; //Size: 0x0088
 static_assert(sizeof(CPlayerSleep) == 0x88);

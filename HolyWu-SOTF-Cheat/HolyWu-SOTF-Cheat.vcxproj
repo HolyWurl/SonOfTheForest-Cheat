@@ -206,6 +206,7 @@
     <ClInclude Include="pointers.h" />
     <ClInclude Include="settings.h" />
     <ClInclude Include="UPlayerData.h" />
+    <ClInclude Include="WorldTime.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

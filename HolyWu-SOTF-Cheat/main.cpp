@@ -136,7 +136,7 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 				sets::is_modify_pos = true;
 			}
 
-			ImGui::Text("时间(分):%d", sets::current_minute);
+			ImGui::Text("已过时间(分):%d", sets::current_minute);
 			ImGui::SameLine();
 			ImGui::PushItemWidth(160);
 			ImGui::InputInt("欲设置时间(分)", &sets::set_minute);
@@ -145,7 +145,6 @@ HRESULT __stdcall hkPresent(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT 
 			if (ImGui::Button("设置"))
 			{
 				sets::is_modify_time = true;
-				sets::time_set_count = 0;
 			}
 
 		}
@@ -206,7 +205,7 @@ DWORD WINAPI run(LPVOID lpReserved)
 		}
 		else
 		{
-			byte newBytes[] = { 0xFF, 0x4E, 0x5C };
+			byte newBytes[] = { 0xFF, 0x4F, 0x5C };
 			PDWORD O;
 			if (VirtualProtect(g_pointers->m_patch_wood, sizeof(newBytes) + 1, PAGE_EXECUTE_READWRITE, (PDWORD)&O) != 0)
 			{

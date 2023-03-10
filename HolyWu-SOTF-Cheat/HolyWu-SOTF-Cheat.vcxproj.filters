@@ -156,6 +156,9 @@
     <ClInclude Include="UPlayerData.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="WorldTime.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="头文件">

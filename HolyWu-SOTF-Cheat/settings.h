@@ -2,6 +2,7 @@
 #include <cstdint>
 #include "PlayerStateData.h"
 #include "UPlayerData.h"
+#include "WorldTime.h"
 
 namespace sets {
 	inline bool is_modify_leaf = false;
@@ -25,5 +26,4 @@ namespace sets {
 	inline bool is_modify_time = false;
 	inline uint64_t current_minute = 0;
 	inline int32_t set_minute = 0;
-	inline uint8_t time_set_count = 0;
 }

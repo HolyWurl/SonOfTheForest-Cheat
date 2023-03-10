@@ -1,15 +1,16 @@
 #pragma once
 #include "includes.h"
 #include "detour_hook.h"
+#include <emmintrin.h>
 
 struct hooks
 {
 	static bool hk_get_leaf_call(__int64 a1, uint32_t a2, uint32_t amount, bool a4);
-	static __int64 hk_local_player_data(void* a1);
+	static __int64 hk_local_player_data(CPlayerStateData* a1);
 	static __int64 hk_item_amount(__int64 a1, uint32_t a2);
 	static void hk_patch_fov(__int64 a1, float a2);
 	static bool hk_player_func(UPlayerData* a1, float* a2, bool a3);
-	static uint64_t hk_world_time(uint64_t* time);
+	static __int64 hk_world_time(WorldTime* time, uint64_t* a2, bool a3);
 };
 struct minhook_keepalive
 {

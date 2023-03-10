@@ -5,9 +5,9 @@ class UPlayerData
 {
 public:
 	char pad_0000[104]; //0x0000
-	uint32_t m_unk68; //0x0068
+	uint32_t m_unk_0x68; //0x0068
 	char pad_006C[64]; //0x006C
-	uint32_t m_unkAC; //0x00AC
+	uint32_t m_unk_0xAC; //0x00AC
 	char pad_00B0[144]; //0x00B0
 	float m_heading1; //0x0140
 	float m_heading2; //0x0144

@@ -6,23 +6,23 @@
 pointers::pointers()
 {
 	memory::pattern_batch main_batch;
-	main_batch.add("get_leaf_call", "E8 ? ? ? ? EB 1B 48 8B 48 20", [this](memory::handle ptr)
+	main_batch.add("get_leaf_call", "E8 ? ? ? ? EB 1D 48 85 C0", [this](memory::handle ptr)
 	{
 		m_get_leaf_call = ptr.add(1).rip().as<void*>();
 	});
-	main_batch.add("local_player_data", "40 53 48 83 EC 70 0F 29 74 24 ? 33 D2", [this](memory::handle ptr)
+	main_batch.add("local_player_data", "E8 ? ? ? ? EB 52 4D 85 C0", [this](memory::handle ptr)
 	{
-		m_local_player_data = ptr.as<void*>();
+		m_local_player_data = ptr.add(1).rip().as<void*>();
 	});
-	main_batch.add("patch_wood", "E8 ? ? ? ? 0F 29 74 24 ? 84 DB", [this](memory::handle ptr)
+	main_batch.add("patch_wood", "E8 ? ? ? ? 0F 29 74 24 ? 40 84 F6", [this](memory::handle ptr)
 	{
-		m_patch_wood = ptr.add(1).rip().add(0x15B).as<void*>();
+		m_patch_wood = ptr.add(1).rip().add(0x13B).as<void*>();
 	});
 	main_batch.add("item_amount", "E8 ? ? ? ? 3B 43 70", [this](memory::handle ptr)
 	{
 		m_item_amount = ptr.add(1).rip().as<void*>();
 	});
-	main_batch.add("world_time", "E8 ? ? ? ? 8B D7 2B D6", [this](memory::handle ptr)
+	main_batch.add("world_time", "E8 ? ? ? ? 48 8B 9C 24 ? ? ? ? B0 01 0F 28 B4 24", [this](memory::handle ptr)
 	{
 		m_world_time = ptr.add(1).rip().as<void*>();
 	});
